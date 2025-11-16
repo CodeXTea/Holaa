@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anda Untung! 🎉</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1 id="headline">Tahniah!</h1>
+      <p id="sub">Anda terpilih untuk menerima hadiah misteri.</p>
+
+      <div id="prank-area">
+        <button id="start-btn" class="btn">Tuntut Hadiah</button>
+
+        <div id="loader" class="hidden">
+          <div class="dots">
+            <span>.</span><span>.</span><span>.</span>
+          </div>
+          <p class="muted">Memeriksa... Sila tunggu</p>
+        </div>
+
+        <div id="result" class="hidden">
+          <h2 id="result-title"></h2>
+          <p id="result-text"></p>
+          <button id="reset-btn" class="btn ghost">Main Lagi</button>
+        </div>
+      </div>
+
+      <p class="small muted">Dibuat sebagai prank mesra — jangan gunakan untuk menipu serius.</p>
+    </div>
+  </main>
+
+  <!-- simple confetti canvas -->
+  <canvas id="confetti"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
