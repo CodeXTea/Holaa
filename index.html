@@ -1,41 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Anda Untung! 🎉</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prank Station 😂</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <div class="card">
-      <h1 id="headline">Tahniah!</h1>
-      <p id="sub">Anda terpilih untuk menerima hadiah misteri.</p>
 
-      <div id="prank-area">
-        <button id="start-btn" class="btn">Tuntut Hadiah</button>
+  <div class="container">
+    <h1>Prank Station 😂</h1>
+    <p>Pilih satu prank untuk kenakan kawan!</p>
 
-        <div id="loader" class="hidden">
-          <div class="dots">
-            <span>.</span><span>.</span><span>.</span>
-          </div>
-          <p class="muted">Memeriksa... Sila tunggu</p>
-        </div>
+    <button class="btn" onclick="showPrank('gift')">🎁 Prank Hadiah</button>
+    <button class="btn" onclick="showPrank('camera')">📸 Prank Kamera</button>
+    <button class="btn" onclick="showPrank('bsod')">💀 Prank Blue Screen</button>
+  </div>
 
-        <div id="result" class="hidden">
-          <h2 id="result-title"></h2>
-          <p id="result-text"></p>
-          <button id="reset-btn" class="btn ghost">Main Lagi</button>
-        </div>
-      </div>
+  <!-- Prank Sections -->
+  <div id="gift" class="prank hidden">
+    <h2>Claim Reward Free Fire / ML</h2>
+    <p>Loading server...</p>
+    <div class="loader"></div>
+    <p id="gift-result" class="hidden"></p>
+  </div>
 
-      <p class="small muted">Dibuat sebagai prank mesra — jangan gunakan untuk menipu serius.</p>
+  <div id="camera" class="prank hidden">
+    <h2>Mengaktifkan Kamera Depan...</h2>
+    <video id="fakeCam" autoplay playsinline muted></video>
+    <p class="small">Kamera anda sedang dihantar ke server...</p>
+  </div>
+
+  <div id="bsod" class="prank hidden full-screen">
+    <div class="bsod-screen">
+      <h1>:(</h1>
+      <p>Phone anda mengalami error kritikal.</p>
+      <p>Restarting...</p>
     </div>
-  </main>
-
-  <!-- simple confetti canvas -->
-  <canvas id="confetti"></canvas>
+  </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
