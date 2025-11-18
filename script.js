@@ -12,13 +12,15 @@ let chartsLoaded = false;
 google.charts.load('current', { packages:['corechart','bar'] });
 google.charts.setOnLoadCallback(()=>{ chartsLoaded=true; drawChartsLive(); });
 
-navButtons.forEach(btn=>{
-  btn.addEventListener('click',()=>{
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
     const tgt = btn.getAttribute('data-target');
-    sections.forEach(s=>s.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
     document.getElementById(tgt).classList.add('active');
-    navButtons.forEach(b=>b.classList.remove('active'));
+    navButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+  });
+});
 
     [statsCta, damageCta].forEach(c=>c.classList.remove('show'));
     if(tgt==='stats') statsCta.classList.add('show');
