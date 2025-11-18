@@ -4,8 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tabung Kemanusiaan Palestin</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="page">
@@ -36,6 +40,7 @@
 
     <div class="grid">
       <main>
+        <!-- MENU -->
         <section id="menu" class="card section active">
           <h2 id="menu_title">Menu Utama</h2>
           <p id="menu_desc">Pilih bahagian di atas untuk melihat sejarah, statistik dan kerosakan.</p>
@@ -44,19 +49,23 @@
           </div>
         </section>
 
+        <!-- SEJARAH -->
         <section id="history" class="card section">
           <h2 id="history_title">Sejarah Palestin</h2>
           <p id="history_text">
             <strong>Zaman Purba hingga Uthmaniyah:</strong> Wilayah Palestin mempunyai sejarah beribu tahun, menjadi pusat agama dan budaya.
-            <br><strong>1917–1947:</strong> Mandat British, ketegangan meningkat.
-            <br><strong>1948 & Nakba:</strong> Pengisytiharan Israel membawa perang dan pemindahan rakyat Palestin.
-            <br><strong>1967:</strong> Perang Enam Hari, Israel menawan Gaza & Tebing Barat.
-            <br><strong>1987 & 2000:</strong> Intifada, Perjanjian Oslo, konflik berulang.
-            <br><strong>2005–2022:</strong> Gaza di bawah Hamas, peperangan dan krisis kemanusiaan.
-            <br><strong>Sejak 7 Okt 2023:</strong> Konflik besar berlaku, kematian ramai dan kerosakan infrastruktur.
+            <br><strong>1917–1947 (Mandat British):</strong> Selepas Deklarasi Balfour, imigrasi Yahudi meningkat dan ketegangan antara komuniti menonjol.
+            <br><strong>1948 & Nakba:</strong> Pengisytiharan Israel membawa perang dan pemindahan besar rakyat Palestin (“Nakba”).
+            <br><strong>1950-an hingga 1967:</strong> Garis sempadan Green ditetapkan, dengan Gaza di bawah Mesir dan Tebing Barat di bawah Jordan.
+            <br><strong>1967 – Perang Enam Hari:</strong> Israel menawan Gaza dan Tebing Barat; ini memulakan era pendudukan.
+            <br><strong>1987 & 2000 – Intifada:</strong> Pemberontakan rakyat Palestin menuntut kemerdekaan; Perjanjian Oslo (1993) dilengkapkan tetapi keganasan kembali.
+            <br><strong>2005–2014:</strong> Israel menarik diri dari Gaza tetapi kawalan sempadan kekal; Hamas mengambil alih Gaza dan konflik berulang.
+            <br><strong>2014–2022:</strong> Siri peperangan dan krisis kemanusiaan: kerosakan hospital, sekolah, bekalan asas.
+            <br><strong>Sejak 7 Oktober 2023:</strong> Konflik besar berlaku, dengan kematian ramai, pengungsian besar-besaran dan kerosakan infrastruktur.
           </p>
         </section>
 
+        <!-- STATISTIK -->
         <section id="stats" class="card section">
           <h2 id="stats_title">Statistik Kematian (Live)</h2>
           <div id="chart_stats"></div>
@@ -64,6 +73,7 @@
           <button class="cta secondary" id="stats_cta">Sokong Kecemasan Perubatan</button>
         </section>
 
+        <!-- KEROSAKAN -->
         <section id="damage" class="card section">
           <h2 id="damage_title">Kerosakan Infrastruktur (Live)</h2>
           <div id="chart_damage"></div>
@@ -96,6 +106,7 @@
     <div class="accessibility" id="okuBtn">♿ Mesra OKU</div>
   </div>
 
+  <!-- Link JS -->
   <script src="script.js"></script>
 </body>
 </html>
