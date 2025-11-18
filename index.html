@@ -1,45 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prank Station 😂</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tabung Kemanusiaan — Solidariti Palestin</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ca3a3a;--muted:#94a3b8;--glass: rgba(255,255,255,0.05)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui; background:#071228;color:#e6eef8}
+    header{display:flex;align-items:center;gap:16px;padding:16px}
+    .container{max-width:1250px;margin:auto;padding:20px}
+    .logo{width:60px;height:60px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .lang{margin-left:auto;color:var(--muted)}
+    select{padding:6px;border-radius:8px;background:#0f1a30;color:white;border:1px solid #233}
+    .card{background:var(--glass);backdrop-filter:blur(6px);padding:18px;border-radius:14px;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    img.rescue{width:100%;border-radius:12px;margin:10px 0}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+    .mutebtn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+    .accessibility{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:10px 14px;border-radius:50px;cursor:pointer;border:2px solid #334155}
+    .okumode{font-size:1.3rem}
+    .nav-auth{position:absolute;top:20px;right:20px}
+    .qr{width:120px;border-radius:8px;margin-top:8px}
+  </style>
 </head>
-<body>
-
-  <div class="container">
-    <h1>Prank Station 😂</h1>
-    <p>Pilih satu prank untuk kenakan kawan!</p>
-
-    <button class="btn" onclick="showPrank('gift')">🎁 Prank Hadiah</button>
-    <button class="btn" onclick="showPrank('camera')">📸 Prank Kamera</button>
-    <button class="btn" onclick="showPrank('bsod')">💀 Prank Blue Screen</button>
-  </div>
-
-  <!-- Prank Sections -->
-  <div id="gift" class="prank hidden">
-    <h2>Claim Reward Free Fire / ML</h2>
-    <p>Loading server...</p>
-    <div class="loader"></div>
-    <p id="gift-result" class="hidden"></p>
-  </div>
-
-  <div id="camera" class="prank hidden">
-    <h2>Mengaktifkan Kamera Depan...</h2>
-    <video id="fakeCam" autoplay playsinline muted></video>
-    <p class="small">Kamera anda sedang dihantar ke server...</p>
-  </div>
-
-  <div id="bsod" class="prank hidden full-screen">
-    <div class="bsod-screen">
-      <h1>:(</h1>
-      <p>Phone anda mengalami error kritikal.</p>
-      <p>Restarting...</p>
+<body>  <div class="nav-auth">
+    <button id="loginBtn" class="mutebtn">Log Masuk</button>
+    <button id="logoutBtn" class="mutebtn" style="display:none">Log Keluar</button>
+  </div>  <header>
+    <div class="logo">PF</div>
+    <h1>Tabung Kemanusiaan Palestin</h1>
+    <div class="lang">
+      <label>Pilih Bahasa: </label>
+      <select id="langSelect">
+        <option value="ms">Bahasa Melayu</option>
+        <option value="en">English</option>
+        <option value="ar">العربية (Arab)</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
     </div>
-  </div>
+  </header>  <div class="container">
+    <div class="grid"><!-- LEFT SECTION -->
+  <section>
+    <div class="card">
+      <h2>Isu Kemanusiaan Palestin</h2>
+      <p>Penduduk Palestin menghadapi kekurangan makanan, ubat-ubatan, tempat perlindungan dan keselamatan asas. Bantuan anda memberi kesan besar.</p>
 
-  <script src="script.js"></script>
+      <!-- REALISTIC IMAGES -->
+      <img class="rescue" src="Sumud.jpg" alt="Kemanusiaan Palestin" />
+      <img class="rescue" src="palestin.jpg" alt="Bantuan Mangsa" />
 
-</body>
+      <h3>Video Berkaitan</h3>
+      <div style="position:relative;padding-top:56%">
+        <iframe src="https://m.youtube.com/embed/TfKhle4k3d0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Isu Hak Asasi</h3>
+      <ul>
+        <li>Hak perlindungan kepada orang awam</li>
+        <li>Akses bantuan kemanusiaan tanpa halangan</li>
+        <li>Keselamatan kanak-kanak</li>
+        <li>Kebebasan maklumat & laporan bebas</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RIGHT SECTION DONATION -->
+  <aside>
+    <div class="card">
+      <h2>Sumbangan</h2>
+      <p>Pilih kaedah pembayaran</p>
+
+      <h4>💳 QR Pay (Malaysia)</h4>
+      <img class="qr" src="https://i.imgur.com/0X7GQKp.png" alt="QR Pay" />
+
+      <h4>🟦 Touch 'n Go eWallet</h4>
+      <img class="qr" src="tng.png" alt="TnG QR" />
+
+      <h4>🌍 PayPal</h4>
+      <a class="btn" href="#">Derma melalui PayPal</a>
+
+      <hr style="border-color:#233" />
+
+      <p>Isi maklumat anda:</p>
+      <input id="nameField" type="text" placeholder="Nama penuh" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
+      <input id="emailField" type="email" placeholder="Emel" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
+
+      <button class="btn" style="width:100%;margin-top:10px" onclick="submitDonation()">Hantar</button>
+    </div>
+  </aside>
+</div>
+
+  </div>  <!-- OKU ACCESSIBILITY BUTTON -->  <div class="accessibility" id="okuBtn">♿ Mesra OKU</div>  <script>
+    // LOGIN LOGOUT
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    loginBtn.onclick = ()=>{
+      localStorage.setItem("logged","1");
+      loginBtn.style.display="none";
+      logoutBtn.style.display="inline-block";
+      alert("Berjaya log masuk (demo)");
+    }
+    logoutBtn.onclick = ()=>{
+      localStorage.removeItem("logged");
+      loginBtn.style.display="inline-block";
+      logoutBtn.style.display="none";
+      alert("Log keluar berjaya");
+    }
+
+    if(localStorage.getItem("logged")){
+      loginBtn.style.display="none";
+      logoutBtn.style.display="inline-block";
+    }
+
+    function submitDonation(){
+      const name=document.getElementById("nameField").value;
+      if(!name){alert("Sila masukkan nama");return;}
+      alert("Terima kasih atas sumbangan! (demo)");
+    }
+
+    // OKU MODE
+    const okuBtn=document.getElementById("okuBtn");
+    let oku=false;
+    okuBtn.onclick=()=>{
+      oku=!oku;
+      if(oku){
+        document.body.style.fontSize="1.3rem";
+        document.body.style.letterSpacing="0.5px";
+        okuBtn.innerHTML="♿ Mod Biasa";
+      } else {
+        document.body.style.fontSize="1rem";
+        okuBtn.innerHTML="♿ Mesra OKU";
+      }
+    }
 </html>
+  </script></body>
