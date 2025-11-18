@@ -8,26 +8,26 @@
 }
 
 * { box-sizing: border-box; scroll-behavior: smooth; }
-html, body { margin:0; padding:0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.5;}
-.page { max-width:1100px; margin:20px auto; padding:16px;}
-header { display:flex; align-items:center; gap:16px; margin-bottom:8px;}
-.logo { width:60px; height:60px; border-radius:12px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem;}
-h1 { margin:0; font-size:1.6rem;}
-.small { font-size:.9rem;}
+html, body { margin:0; padding:0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height:1.5; }
+.page { max-width:1100px; margin:20px auto; padding:16px; }
+header { display:flex; align-items:center; gap:16px; margin-bottom:8px; }
+.logo { width:60px; height:60px; border-radius:12px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem; }
+h1 { margin:0; font-size:1.6rem; }
+.small { font-size:.9rem; }
 .muted { color: var(--muted); }
 
 .lang-select { margin-left:auto; display:flex; gap:8px; align-items:center; color: var(--muted);}
-select { padding:6px; border-radius:8px; background:#07162a; color:var(--text); border:1px solid #203040;}
+select { padding:6px; border-radius:8px; background:#07162a; color:var(--text); border:1px solid #203040; }
 
 nav.topnav { display:flex; gap:12px; margin:12px 0 20px; padding:10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03);}
-nav.topnav button { background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; transition: transform .1s;}
+nav.topnav button { background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.03); padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; transition: transform .1s; }
 nav.topnav button:hover { transform:translateY(-2px);}
 nav.topnav button.active { background:var(--accent); border-color:rgba(0,0,0,0.2); box-shadow:0 6px 18px rgba(0,0,0,0.4); }
 
 .grid { display:grid; grid-template-columns:2fr 1fr; gap:20px; }
-@media(max-width:900px){.grid { grid-template-columns:1fr;}}
+@media(max-width:900px){.grid { grid-template-columns:1fr;} }
 
-.card { background:var(--card); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);}
+.card { background:var(--card); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); }
 img.rescue { width:100%; border-radius:10px; margin:10px 0; display:block; }
 
 .btn { display:inline-block; padding:10px 14px; border-radius:10px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
@@ -38,12 +38,9 @@ img.rescue { width:100%; border-radius:10px; margin:10px 0; display:block; }
 .cta.emph { background:var(--accent); color:white; }
 .cta.secondary { background:var(--accent-2); color:white; }
 
-.section { display:none; animation: fadeIn .25s ease both; }
+.section { display:none; animation:fadeIn .25s ease both; }
 .section.active { display:block; }
 @keyframes fadeIn { from {opacity:0; transform:translateY(6px);} to {opacity:1; transform:none;} }
-
-.video-container { position:relative; padding-top:56%; border-radius:10px; overflow:hidden; margin-top:12px; }
-.video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
 
 #chart_stats, #chart_damage { width:100%; min-height:300px; }
 
@@ -52,4 +49,7 @@ img.rescue { width:100%; border-radius:10px; margin:10px 0; display:block; }
 .rtl { direction:rtl; text-align:right; }
 .rtl nav.topnav { justify-content:flex-start; }
 
-input { width:100%; padding:8px; border-radius:8px; margin:6px 0; background:#0a1523; border:1px solid #233; color:#e6eef8;}
+.video-container { position:relative; padding-top:56%; border-radius:10px; overflow:hidden; margin-top:12px; }
+.video-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+input { width:100%; padding:8px; border-radius:8px; margin:6px 0; background:#0a1523; border:1px solid #233; color:#e6eef8; }
