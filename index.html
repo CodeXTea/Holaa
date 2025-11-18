@@ -9,119 +9,68 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <style>
-    :root{
-      --bg:#071228;
-      --card:#0b1220;
-      --accent:#ca3a3a;
-      --accent-2:#2e8b57;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.04);
-      --text:#e6eef8;
+    :root {
+      --bg: #071228;
+      --card: #0b1220;
+      --accent: #ca3a3a;
+      --accent-2: #2e8b57;
+      --muted: #94a3b8;
+      --text: #e6eef8;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      transition:all .15s;
-    }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html, body { height: 100%; margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 1100px; margin: 20px auto; padding: 16px; }
+    header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+    .logo { width: 60px; height: 60px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+    h1 { margin: 0; font-size: 1.6rem; }
+    .small { font-size: .9rem; }
+    .muted { color: var(--muted); }
 
-    .page{
-      max-width:1100px;
-      margin:20px auto;
-      padding:16px;
-    }
+    .lang-select { margin-left: auto; display: flex; gap: 8px; align-items: center; color: var(--muted); }
+    select { padding: 6px; border-radius: 8px; background: #07162a; color: var(--text); border: 1px solid #203040; }
 
-    header{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:8px;
-    }
-    .logo{
-      width:60px;height:60px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;
-    }
-    h1{margin:0;font-size:1.6rem}
-    .lang-select{margin-left:auto;display:flex;gap:8px;align-items:center;color:var(--muted)}
-    select{padding:6px;border-radius:8px;background:#07162a;color:var(--text);border:1px solid #203040}
+    nav.topnav { display: flex; gap: 12px; margin: 12px 0 20px; padding: 10px; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.03); }
+    nav.topnav button { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: transform .1s; }
+    nav.topnav button:hover { transform: translateY(-2px); }
+    nav.topnav button.active { background: var(--accent); border-color: rgba(0,0,0,0.2); box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
 
-    /* NAV under H1 */
-    nav.topnav{
-      display:flex;
-      gap:12px;
-      margin:12px 0 20px 0;
-      padding:10px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    nav.topnav button{
-      background:transparent;
-      color:var(--text);
-      border:1px solid rgba(255,255,255,0.03);
-      padding:8px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:600;
-    }
-    nav.topnav button:hover{transform:translateY(-2px)}
-    nav.topnav button.active{
-      background:var(--accent);
-      border-color:rgba(0,0,0,0.2);
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
-    }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    @media(max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
-    /* layout */
-    .grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .card { background: var(--card); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03); }
+    img.rescue { width: 100%; border-radius: 10px; margin: 10px 0; display: block; }
 
-    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    img.rescue{width:100%;border-radius:10px;margin:10px 0;display:block}
+    .btn { display: inline-block; padding: 10px 14px; border-radius: 10px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
+    .mutebtn { background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--muted); padding: 8px 12px; border-radius: 8px; }
 
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
-    .mutebtn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 12px;border-radius:8px}
+    .cta { display: none; margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-weight: 700; }
+    .cta.show { display: inline-block; }
+    .cta.emph { background: var(--accent); color: white; }
+    .cta.secondary { background: var(--accent-2); color: white; }
 
-    /* tombol penekanan - hanya muncul bila section dipilih */
-    .cta{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-weight:700}
-    .cta.show{display:inline-block}
-    .cta.emph{background:var(--accent);color:white}
-    .cta.secondary{background:var(--accent-2);color:white}
+    .section { display: none; animation: fadeIn .25s ease both; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
 
-    /* sections hidden by default except menu */
-    .section{display:none;animation:fadeIn .25s ease both}
-    .section.active{display:block}
+    #chart_stats, #chart_damage { width: 100%; min-height: 300px; }
 
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .accessibility { position: fixed; bottom: 20px; right: 20px; background: #0f172a; color: white; padding: 10px 14px; border-radius: 50px; cursor: pointer; border: 2px solid #233; }
 
-    /* small helper */
-    .muted{color:var(--muted)}
-    .small{font-size:.9rem}
-    hr{border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0}
-
-    /* charts */
-    #chart_stats, #chart_damage{width:100%;min-height:300px}
-
-    /* accessibility button */
-    .accessibility{position:fixed;bottom:20px;right:20px;background:#0f172a;color:white;padding:10px 14px;border-radius:50px;cursor:pointer;border:2px solid #233}
-
-    /* RTL support - applied to body by JS when lang = ar */
-    .rtl{direction:rtl;text-align:right}
-    .rtl nav.topnav{justify-content:flex-start}
+    /* RTL for Arabic */
+    .rtl { direction: rtl; text-align: right; }
+    .rtl nav.topnav { justify-content: flex-start; }
   </style>
 </head>
 <body>
   <div class="page" id="page">
+
+    <!-- HEADER -->
     <header>
       <div class="logo">PF</div>
       <div>
         <h1 id="title">Tabung Kemanusiaan Palestin</h1>
         <div class="small muted" id="subtitle">Solidariti dan bantuan kecemasan</div>
       </div>
-
       <div class="lang-select">
         <label for="langSelect" id="langLabel">Bahasa:</label>
         <select id="langSelect" aria-label="Pilih Bahasa">
@@ -133,7 +82,7 @@
       </div>
     </header>
 
-    <!-- NAV under H1 -->
+    <!-- NAV BAR -->
     <nav class="topnav" role="navigation" aria-label="Main navigation">
       <button data-target="menu" class="active" id="nav_menu">Menu</button>
       <button data-target="history" id="nav_history">Sejarah</button>
@@ -142,18 +91,16 @@
     </nav>
 
     <div class="grid">
-      <!-- LEFT: Main content -->
       <main>
-
-        <!-- MENU (default visible) -->
+        <!-- Menu Section -->
         <section id="menu" class="card section active">
           <h2 id="menu_title">Menu Utama</h2>
           <p id="menu_desc">Pilih tajuk di navbar untuk melihat maklumat lengkap. Video berkaitan disertakan di bawah.</p>
 
-          <!-- video related kept -->
           <div style="position:relative;padding-top:56%;border-radius:10px;overflow:hidden;margin-top:12px">
             <iframe id="related_video" src="https://www.youtube.com/embed/TfKhle4k3d0"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen title="Video Berkaitan"></iframe>
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen
+              title="Video Berkaitan"></iframe>
           </div>
 
           <div style="margin-top:14px">
@@ -162,32 +109,31 @@
           </div>
         </section>
 
-        <!-- HISTORY -->
+        <!-- Sejarah Section -->
         <section id="history" class="card section">
           <h2 id="history_title">Sejarah Palestin</h2>
           <p id="history_text">Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada pelbagai komunitas. Konflik moden bermula pada pertengahan abad ke-20 dan memberi impak besar kepada kehidupan rakyat.</p>
           <button class="cta emph" id="history_cta">Baca Sejarah Penuh</button>
         </section>
 
-        <!-- STATS -->
+        <!-- Statistik (Death) Section -->
         <section id="stats" class="card section">
           <h2 id="stats_title">Statistik Kematian</h2>
           <div id="chart_stats"></div>
-          <div class="small muted" id="stats_note">Graf menunjukkan contoh pecahan mangsa mengikut kumpulan umur; kemaskini data sebenar apabila tersedia.</div>
+          <div class="small muted" id="stats_note">Anggaran pecahan mangsa mengikut umur. Sila kemaskini data sebenar apabila tersedia.</div>
           <button class="cta secondary" id="stats_cta">Sokong Kecemasan Perubatan</button>
         </section>
 
-        <!-- DAMAGE -->
+        <!-- Kerosakan Infrastruktur Section -->
         <section id="damage" class="card section">
           <h2 id="damage_title">Kerosakan Infrastruktur</h2>
           <div id="chart_damage"></div>
-          <p class="small muted" id="damage_note">Graf menunjukkan contoh peratus jenis infrastruktur yang rosak. Sumber data perlu dikemaskini dengan angka rasmi.</p>
+          <p class="small muted" id="damage_note">Anggaran peratus kerosakan jenis infrastruktur. Sila kemaskini dengan angka rasmi.</p>
           <button class="cta emph" id="damage_cta">Bantuan Infrastruktur</button>
         </section>
 
       </main>
 
-      <!-- RIGHT: Donation & quick info -->
       <aside>
         <div class="card">
           <h3 id="donation_title">Sumbangan</h3>
@@ -216,16 +162,14 @@
           <p id="quick_text" class="small muted">Peta bantuan, kontak kecemasan dan ringkasan isu boleh diletakkan di sini.</p>
         </div>
       </aside>
-    </div> <!-- grid -->
+    </div> <!-- .grid -->
 
-  </div> <!-- page -->
+  </div> <!-- .page -->
 
   <div class="accessibility" id="okuBtn">♿ Mesra OKU</div>
 
   <script>
-    // ------------------------
-    // i18n text data
-    // ------------------------
+    // — LANG DATA —
     const langData = {
       ms: {
         title: "Tabung Kemanusiaan Palestin",
@@ -238,10 +182,10 @@
         history_text: "Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada pelbagai komunitas. Konflik moden bermula pada pertengahan abad ke-20 dan memberi impak besar kepada kehidupan rakyat.",
         history_cta: "Baca Sejarah Penuh",
         stats_title: "Statistik Kematian",
-        stats_note: "Graf menunjukkan contoh pecahan mangsa mengikut kumpulan umur; kemaskini data sebenar apabila tersedia.",
+        stats_note: "Anggaran pecahan mangsa mengikut umur. Sila kemaskini data sebenar apabila tersedia.",
         stats_cta: "Sokong Kecemasan Perubatan",
         damage_title: "Kerosakan Infrastruktur",
-        damage_note: "Graf menunjukkan contoh peratus jenis infrastruktur yang rosak. Sumber data perlu dikemaskini dengan angka rasmi.",
+        damage_note: "Anggaran peratus kerosakan jenis infrastruktur. Sila kemaskini dengan angka rasmi.",
         damage_cta: "Bantuan Infrastruktur",
         donation_title: "Sumbangan",
         donation_desc: "Pilih kaedah pembayaran dan isi maklumat ringkas.",
@@ -254,8 +198,8 @@
         quick_text: "Peta bantuan, kontak kecemasan dan ringkasan isu boleh diletakkan di sini.",
         chart_stats_title: "Mangsa mengikut kumpulan umur",
         chart_damage_title: "Peratus Kerosakan Infrastruktur",
-        chart_stats_description: "Contoh: Kanak-kanak, Wanita, Warga Emas",
-        chart_damage_description: "Contoh: Hospital, Sekolah, Rumah",
+        chart_stats_description: "Kanak-kanak, Wanita, Warga Emas",
+        chart_damage_description: "Hospital, Sekolah, Rumah"
       },
       en: {
         title: "Humanitarian Fund Palestine",
@@ -268,10 +212,10 @@
         history_text: "Palestine has a history spanning thousands of years and is sacred to multiple communities. The modern conflict began in the mid-20th century with profound effects on civilians.",
         history_cta: "Read Full History",
         stats_title: "Death Statistics",
-        stats_note: "Chart shows example breakdown of victims by age group; update with official data when available.",
+        stats_note: "Chart shows a breakdown of victims by age group. Update with real data when available.",
         stats_cta: "Support Medical Emergency",
         damage_title: "Infrastructure Damage",
-        damage_note: "Chart shows sample percentages of damaged infrastructure types. Update with official figures.",
+        damage_note: "Chart shows approximate percentages of damaged infrastructure types. Use official data when possible.",
         damage_cta: "Infrastructure Aid",
         donation_title: "Donations",
         donation_desc: "Choose a payment method and enter brief details.",
@@ -281,11 +225,11 @@
         paypal_btn: "Donate via PayPal",
         donate_button: "Submit",
         quick_title: "Quick Info",
-        quick_text: "Relief maps, emergency contacts and issue summaries can be placed here.",
+        quick_text: "Relief maps, emergency contacts and issue summaries can go here.",
         chart_stats_title: "Victims by age group",
-        chart_damage_title: "Infrastructure Damage Percentage",
-        chart_stats_description: "Example: Children, Women, Elderly",
-        chart_damage_description: "Example: Hospitals, Schools, Homes",
+        chart_damage_title: "Infrastructure Damage (%)",
+        chart_stats_description: "Children, Women, Elderly",
+        chart_damage_description: "Hospitals, Schools, Homes"
       },
       ar: {
         title: "صندوق فلسطين الإنساني",
@@ -298,10 +242,10 @@
         history_text: "تمتلك فلسطين تاريخًا يعود لآلاف السنين وهي مقدّسة لعدة مجتمعات. بدأ الصراع الحديث في منتصف القرن العشرين وله آثار كبيرة على السكان المدنيين.",
         history_cta: "اقرأ التاريخ الكامل",
         stats_title: "إحصاءات الوفيات",
-        stats_note: "يوضح الرسم مثالًا لتقسيم الضحايا حسب الفئة العمرية؛ حدّث البيانات الرسمية عند توفرها.",
+        stats_note: "يوضح الرسم تقسيماً تقريبياً للضحايا حسب الفئة العمرية. حدّثه بالبيانات الحقيقية عند توفرها.",
         stats_cta: "ادعم الطوارئ الطبية",
         damage_title: "أضرار البنية التحتية",
-        damage_note: "يوضح الرسم نسبًا نموذجية لأنواع البنية التحتية المتضررة. حدّثها بالأرقام الرسمية.",
+        damage_note: "يُظهر الرسم نسبًا تقريبية لأنواع الأضرار. استخدم الأرقام الرسمية إن أمكن.",
         damage_cta: "مساعدة للبنية التحتية",
         donation_title: "التبرعات",
         donation_desc: "اختر طريقة الدفع وأدخل التفاصيل الأساسية.",
@@ -311,11 +255,11 @@
         paypal_btn: "التبرع عبر باي بال",
         donate_button: "إرسال",
         quick_title: "معلومات سريعة",
-        quick_text: "يمكن وضع خرائط الإغاثة، جهات الاتصال الطارئة وملخصات القضايا هنا.",
+        quick_text: "يمكن وضع خرائط الإغاثة، جهات الاتصال الطارئة وملخص القضايا هنا.",
         chart_stats_title: "الضحايا حسب الفئة العمرية",
         chart_damage_title: "نسبة أضرار البنية التحتية",
-        chart_stats_description: "مثال: أطفال، نساء، كبار السن",
-        chart_damage_description: "مثال: مستشفيات، مدارس، منازل",
+        chart_stats_description: "أطفال، نساء، كبار السن",
+        chart_damage_description: "مستشفيات، مدارس، منازل"
       },
       id: {
         title: "Dana Kemanusiaan Palestina",
@@ -328,7 +272,7 @@
         history_text: "Palestina memiliki sejarah ribuan tahun dan suci bagi beberapa komunitas. Konflik modern dimulai pada pertengahan abad ke-20 dan berdampak besar pada warga sipil.",
         history_cta: "Baca Sejarah Lengkap",
         stats_title: "Statistik Kematian",
-        stats_note: "Grafik menunjukkan contoh pembagian korban menurut kelompok usia; perbarui dengan data resmi bila tersedia.",
+        stats_note: "Grafik menunjukkan pembagian korban menurut kelompok usia. Perbarui dengan data resmi bila tersedia.",
         stats_cta: "Dukung Darurat Medis",
         damage_title: "Kerusakan Infrastruktur",
         damage_note: "Grafik menunjukkan persentase contoh tipe infrastruktur yang rusak. Perbarui dengan angka resmi.",
@@ -344,112 +288,77 @@
         quick_text: "Peta bantuan, kontak darurat, dan ringkasan isu dapat ditempatkan di sini.",
         chart_stats_title: "Korban menurut kelompok umur",
         chart_damage_title: "Persentase Kerusakan Infrastruktur",
-        chart_stats_description: "Contoh: Anak-anak, Wanita, Lansia",
-        chart_damage_description: "Contoh: Rumah Sakit, Sekolah, Rumah",
+        chart_stats_description: "Anak-anak, Wanita, Lansia",
+        chart_damage_description: "Rumah Sakit, Sekolah, Rumah"
       }
     };
 
-    // ------------------------
-    // Elements
-    // ------------------------
+    // Elemen penting
     const navButtons = document.querySelectorAll('nav.topnav button');
     const sections = document.querySelectorAll('.section');
     const langSelect = document.getElementById('langSelect');
-
-    // cta buttons
     const historyCta = document.getElementById('history_cta');
     const statsCta = document.getElementById('stats_cta');
     const damageCta = document.getElementById('damage_cta');
-
-    // chart containers
     const chartStatsDiv = document.getElementById('chart_stats');
     const chartDamageDiv = document.getElementById('chart_damage');
+    const okuBtn = document.getElementById('okuBtn');
 
-    // init Google charts
-    google.charts.load('current', {'packages':['corechart','bar']});
+    // Google Charts inisialisasi
+    google.charts.load('current', { 'packages': ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(initCharts);
-
-    let currentLang = 'ms';
     let chartsLoaded = false;
+    let currentLang = 'ms';
 
-    // ------------------------
-    // Navigation behaviour
-    // ------------------------
+    // Fungsi untuk tunjukkan section tertentu
+    function showOnlySection(id) {
+      sections.forEach(s => {
+        if (s.id === id) s.classList.add('active');
+        else s.classList.remove('active');
+      });
+      [historyCta, statsCta, damageCta].forEach(c => c.classList.remove('show'));
+      if (id === 'history') historyCta.classList.add('show');
+      if (id === 'stats') statsCta.classList.add('show');
+      if (id === 'damage') damageCta.classList.add('show');
+      if (id === 'stats' || id === 'damage') drawCharts();
+    }
+
+    // Pasang event listener pada nav
     navButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-target');
         showOnlySection(target);
-        setActiveNav(btn);
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
       });
     });
 
-    function setActiveNav(activeBtn){
-      navButtons.forEach(b => b.classList.remove('active'));
-      activeBtn.classList.add('active');
-    }
-
-    function showOnlySection(id){
-      sections.forEach(s => {
-        if(s.id === id){
-          s.classList.add('active');
-        } else {
-          s.classList.remove('active');
-        }
-      });
-
-      // show CTAs only for the active section
-      // hide all first
-      [historyCta, statsCta, damageCta].forEach(c => c.classList.remove('show'));
-      if(id === 'history') historyCta.classList.add('show');
-      if(id === 'stats') statsCta.classList.add('show');
-      if(id === 'damage') damageCta.classList.add('show');
-
-      // If stats or damage shown, redraw charts for current language
-      if(id === 'stats' || id === 'damage'){
-        drawCharts(); // ensure charts drawn/redrawn
-      }
-    }
-
-    // default is menu visible (already active)
-
-    // ------------------------
-    // Language switching
-    // ------------------------
-    function applyLanguage(lang){
+    // Bahasa — tukar teks
+    function applyLanguage(lang) {
       currentLang = lang;
       const d = langData[lang];
-
-      // Title & header
       document.getElementById('title').textContent = d.title;
       document.getElementById('subtitle').textContent = d.subtitle;
       document.getElementById('langLabel').textContent = d.langLabel;
-
-      // Nav labels
       document.getElementById('nav_menu').textContent = d.nav.menu;
       document.getElementById('nav_history').textContent = d.nav.history;
       document.getElementById('nav_stats').textContent = d.nav.stats;
       document.getElementById('nav_damage').textContent = d.nav.damage;
 
-      // Menu
       document.getElementById('menu_title').textContent = d.menu_title;
       document.getElementById('menu_desc').textContent = d.menu_desc;
-
-      // History
       document.getElementById('history_title').textContent = d.history_title;
       document.getElementById('history_text').textContent = d.history_text;
       historyCta.textContent = d.history_cta;
 
-      // Stats
       document.getElementById('stats_title').textContent = d.stats_title;
       document.getElementById('stats_note').textContent = d.stats_note;
       statsCta.textContent = d.stats_cta;
 
-      // Damage
       document.getElementById('damage_title').textContent = d.damage_title;
       document.getElementById('damage_note').textContent = d.damage_note;
       damageCta.textContent = d.damage_cta;
 
-      // Donation/right
       document.getElementById('donation_title').textContent = d.donation_title;
       document.getElementById('donation_desc').textContent = d.donation_desc;
       document.getElementById('qr_label').textContent = d.qr_label;
@@ -460,123 +369,122 @@
       document.getElementById('quick_title').textContent = d.quick_title;
       document.getElementById('quick_text').textContent = d.quick_text;
 
-      // Set page direction for Arabic (RTL) otherwise LTR
-      if(lang === 'ar'){
-        document.documentElement.lang = 'ar';
+      // Set RTL jika Arab
+      if (lang === 'ar') {
         document.body.classList.add('rtl');
       } else {
-        document.documentElement.lang = lang;
         document.body.classList.remove('rtl');
       }
 
-      // redraw charts with localized titles/labels
+      // refresh graf
       drawCharts();
     }
 
-    langSelect.addEventListener('change', (e) => {
-      applyLanguage(e.target.value);
+    langSelect.addEventListener('change', () => {
+      applyLanguage(langSelect.value);
     });
 
-    // initial
+    // Inisialisasi
     applyLanguage(currentLang);
 
-    // ------------------------
-    // Charts logic (Google Charts)
-    // ------------------------
-    function initCharts(){
+    // ---- Charts ----
+    function initCharts() {
       chartsLoaded = true;
       drawCharts();
     }
 
-    function drawCharts(){
-      if(!chartsLoaded) return;
+    function drawCharts() {
+      if (!chartsLoaded) return;
       const d = langData[currentLang];
 
-      // ---------- Stats Bar Chart ----------
-      // sample data: [group, number]
+      // INFO TERKINI (ANGGARAN) — Nov 2025
+      const totalDeaths = 70000;
+      const pctChildren = 40;
+      const pctWomen = 33;
+      const pctElderly = 7;
+      const childCount = Math.round(totalDeaths * pctChildren / 100);
+      const womenCount = Math.round(totalDeaths * pctWomen / 100);
+      const elderlyCount = Math.round(totalDeaths * pctElderly / 100);
+
       const statsData = google.visualization.arrayToDataTable([
-        [ d.chart_stats_title || 'Group', 'Count', { role: 'style' } ],
-        [ d.chart_stats_description ? d.chart_stats_description.split(',')[0].trim() : 'Children', 1200, 'opacity: 0.9' ],
-        [ d.chart_stats_description ? d.chart_stats_description.split(',')[1].trim() : 'Women', 900, 'opacity: 0.9' ],
-        [ d.chart_stats_description ? d.chart_stats_description.split(',')[2].trim() : 'Elderly', 300, 'opacity: 0.9' ],
+        [ d.chart_stats_title, 'Jumlah Mangsa', { role: 'style' } ],
+        [ d.chart_stats_description.split(',')[0].trim(), childCount, 'opacity: 0.8' ],
+        [ d.chart_stats_description.split(',')[1].trim(), womenCount, 'opacity: 0.8' ],
+        [ d.chart_stats_description.split(',')[2].trim(), elderlyCount, 'opacity: 0.8' ],
       ]);
 
       const statsOptions = {
-        title: d.chart_stats_title,
-        height: 320,
+        title: d.chart_stats_title + ` — (anggaran Nov 2025)`,
+        height: 340,
         legend: { position: 'none' },
-        vAxis: { title: '' },
-        hAxis: { title: '' },
-        chartArea: { left:60, right:20, top:50, bottom:60 },
-        colors: [ currentLang === 'ar' ? '#ca3a3a' : '#ca3a3a' ]
+        vAxis: { minValue: 0 },
+        chartArea: { left: 70, right: 20, top: 60, bottom: 70 },
+        colors: ['#ca3a3a'],
+        annotations: { alwaysOutside: true, textStyle: { fontSize: 12 } }
       };
 
       const statsChart = new google.visualization.ColumnChart(chartStatsDiv);
       statsChart.draw(statsData, statsOptions);
 
-      // ---------- Damage Pie Chart ----------
+      // Kerosakan infrastruktur (contoh peratus)
+      const hospitalsPct = 35;
+      const schoolsPct = 30;
+      const homesPct = 35;
+
       const damageData = google.visualization.arrayToDataTable([
-        [ d.chart_damage_title || 'Type', 'Percent' ],
-        [ d.chart_damage_description ? d.chart_damage_description.split(',')[0].trim() : 'Hospitals', 35 ],
-        [ d.chart_damage_description ? d.chart_damage_description.split(',')[1].trim() : 'Schools', 25 ],
-        [ d.chart_damage_description ? d.chart_damage_description.split(',')[2].trim() : 'Homes', 40 ]
+        [ d.chart_damage_title, 'Peratus' ],
+        [ d.chart_damage_description.split(',')[0].trim(), hospitalsPct ],
+        [ d.chart_damage_description.split(',')[1].trim(), schoolsPct ],
+        [ d.chart_damage_description.split(',')[2].trim(), homesPct ],
       ]);
 
       const damageOptions = {
-        title: d.chart_damage_title,
-        height: 320,
-        pieHole: 0.35,
-        chartArea: { left:20, right:20, top:50, bottom:60 },
+        title: d.chart_damage_title + ` — (anggaran Nov 2025)`,
+        height: 340,
+        pieHole: 0.38,
+        chartArea: { left: 20, right: 20, top: 60, bottom: 60 },
+        legend: { position: 'bottom' }
       };
 
       const damageChart = new google.visualization.PieChart(chartDamageDiv);
       damageChart.draw(damageData, damageOptions);
+
+      // Kemaskini nota di bawah graf
+      const statsNoteEl = document.getElementById('stats_note');
+      const damageNoteEl = document.getElementById('damage_note');
+      if (statsNoteEl) statsNoteEl.textContent = `Anggaran pecahan umur mangsa berdasarkan laporan hingga Nov 2025.`;
+      if (damageNoteEl) damageNoteEl.textContent = `Anggaran peratus kerosakan infrastruktur (hospital/sekolah/rumah) berdasarkan sumber Nov 2025.`;
     }
 
-    // Make charts responsive on resize
     window.addEventListener('resize', () => {
       drawCharts();
     });
 
-    // ------------------------
-    // Donation/demo handlers
-    // ------------------------
+    // Fungsi derma demo
     function submitDonation(){
       const name = document.getElementById('nameField').value.trim();
-      if(!name){
-        alert(currentLang === 'en' ? 'Please enter your name' : (currentLang === 'ar' ? 'يرجى إدخال الاسم' : 'Sila masukkan nama'));
+      if (!name) {
+        alert(currentLang === 'ar' ? 'يرجى إدخال الاسم' : (currentLang === 'en' ? 'Please enter your name' : 'Sila masukkan nama'));
         return;
       }
-      alert(currentLang === 'en' ? 'Thank you for your donation! (demo)' : (currentLang === 'ar' ? 'شكرًا لتبرعك! (تجريبي)' : 'Terima kasih atas sumbangan! (demo)'));
+      alert(currentLang === 'ar' ? 'شكرًا لتبرعك! (تجريبي)' : (currentLang === 'en' ? 'Thank you for your donation! (demo)' : 'Terima kasih atas sumbangan! (demo)'));
       document.getElementById('nameField').value = '';
       document.getElementById('emailField').value = '';
     }
     window.submitDonation = submitDonation;
 
-    // ------------------------
-    // OKU accessibility toggle
-    // ------------------------
-    const okuBtn = document.getElementById('okuBtn');
+    // OKU Accessibility
     let oku = false;
     okuBtn.addEventListener('click', () => {
       oku = !oku;
-      if(oku){
+      if (oku) {
         document.body.style.fontSize = '1.25rem';
-        okuBtn.textContent = (currentLang === 'ar' ? 'الوضع العادي ♿' : (currentLang === 'en' ? 'Normal Mode ♿' : '♿ Mod Biasa'));
+        okuBtn.textContent = currentLang === 'ar' ? 'الوضع العادي ♿' : (currentLang === 'en' ? 'Normal Mode ♿' : '♿ Mod Biasa');
       } else {
         document.body.style.fontSize = '';
-        okuBtn.textContent = (currentLang === 'ar' ? '♿ نمط الوصول' : (currentLang === 'en' ? '♿ Accessibility' : '♿ Mesra OKU'));
+        okuBtn.textContent = currentLang === 'ar' ? '♿ نمط الوصول' : (currentLang === 'en' ? '♿ Accessibility' : '♿ Mesra OKU');
       }
     });
-
-    // ------------------------
-    // Init: ensure menu active and nav highlight
-    // ------------------------
-    document.querySelector('nav.topnav button[data-target="menu"]').classList.add('active');
-
-    // Ensure charts updated after load if stats/damage viewed
-    // Nothing else to do — everything handled by drawCharts and showOnlySection
-
   </script>
 </body>
 </html>
