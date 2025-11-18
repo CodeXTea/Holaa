@@ -1,223 +1,582 @@
-<!doctype html>    
-<html lang="ms">    
-<head>    
-  <meta charset="utf-8" />    
-  <meta name="viewport" content="width=device-width,initial-scale=1" />    
-  <title>Tabung Kemanusiaan — Solidariti Palestin</title>    
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tabung Kemanusiaan — Solidariti Palestin</title>
 
-  <style>    
-    :root{--bg:#0f172a;--card:#0b1220;--accent:#ca3a3a;--muted:#94a3b8;--glass:rgba(255,255,255,0.05)}
+  <!-- Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    *{box-sizing:border-box;scroll-behavior:smooth}
-    body{margin:0;font-family:Inter, system-ui;background:#071228;color:#e6eef8}
+  <style>
+    :root{
+      --bg:#071228;
+      --card:#0b1220;
+      --accent:#ca3a3a;
+      --accent-2:#2e8b57;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --text:#e6eef8;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:all .15s;
+    }
 
-    /* 📌 NAVBAR */
-    .topnav{
-      width:100%;
-      background:#0b1220;
-      padding:14px 20px;
+    .page{
+      max-width:1100px;
+      margin:20px auto;
+      padding:16px;
+    }
+
+    header{
       display:flex;
-      gap:25px;
-      border-bottom:1px solid #233;
-      position:sticky;
-      top:0;
-      z-index:999;
+      gap:16px;
+      align-items:center;
+      margin-bottom:8px;
     }
-    .topnav a{
-      color:#e6eef8;
-      text-decoration:none;
-      font-weight:600;
-      padding:8px 10px;
+    .logo{
+      width:60px;height:60px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;
+    }
+    h1{margin:0;font-size:1.6rem}
+    .lang-select{margin-left:auto;display:flex;gap:8px;align-items:center;color:var(--muted)}
+    select{padding:6px;border-radius:8px;background:#07162a;color:var(--text);border:1px solid #203040}
+
+    /* NAV under H1 */
+    nav.topnav{
+      display:flex;
+      gap:12px;
+      margin:12px 0 20px 0;
+      padding:10px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    nav.topnav button{
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.03);
+      padding:8px 12px;
       border-radius:8px;
-      transition:0.2s;
+      cursor:pointer;
+      font-weight:600;
     }
-    .topnav a:hover{
+    nav.topnav button:hover{transform:translateY(-2px)}
+    nav.topnav button.active{
       background:var(--accent);
+      border-color:rgba(0,0,0,0.2);
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);
     }
 
-    header{display:flex;align-items:center;gap:16px;padding:16px}
-    .container{max-width:1250px;margin:auto;padding:20px}
-    .logo{width:60px;height:60px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700}
-    .lang{margin-left:auto;color:var(--muted)}
-    select{padding:6px;border-radius:8px;background:#0f1a30;color:white;border:1px solid #233}
-
-    .card{background:var(--glass);backdrop-filter:blur(6px);padding:18px;border-radius:14px;margin-bottom:18px}
+    /* layout */
     .grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
     @media(max-width:900px){.grid{grid-template-columns:1fr}}
 
-    img.rescue{width:100%;border-radius:12px;margin:10px 0}
+    .card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    img.rescue{width:100%;border-radius:10px;margin:10px 0;display:block}
+
     .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
-    .mutebtn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+    .mutebtn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 12px;border-radius:8px}
 
-    .accessibility{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:10px 14px;border-radius:50px;cursor:pointer;border:2px solid #334155}
+    /* tombol penekanan - hanya muncul bila section dipilih */
+    .cta{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;font-weight:700}
+    .cta.show{display:inline-block}
+    .cta.emph{background:var(--accent);color:white}
+    .cta.secondary{background:var(--accent-2);color:white}
 
-    .qr{width:120px;border-radius:8px;margin-top:8px}
-    .nav-auth{position:absolute;top:20px;right:20px}
-  </style>    
-</head>    
+    /* sections hidden by default except menu */
+    .section{display:none;animation:fadeIn .25s ease both}
+    .section.active{display:block}
 
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    /* small helper */
+    .muted{color:var(--muted)}
+    .small{font-size:.9rem}
+    hr{border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0}
+
+    /* charts */
+    #chart_stats, #chart_damage{width:100%;min-height:300px}
+
+    /* accessibility button */
+    .accessibility{position:fixed;bottom:20px;right:20px;background:#0f172a;color:white;padding:10px 14px;border-radius:50px;cursor:pointer;border:2px solid #233}
+
+    /* RTL support - applied to body by JS when lang = ar */
+    .rtl{direction:rtl;text-align:right}
+    .rtl nav.topnav{justify-content:flex-start}
+  </style>
+</head>
 <body>
+  <div class="page" id="page">
+    <header>
+      <div class="logo">PF</div>
+      <div>
+        <h1 id="title">Tabung Kemanusiaan Palestin</h1>
+        <div class="small muted" id="subtitle">Solidariti dan bantuan kecemasan</div>
+      </div>
 
-<!-- 🔥 NAVIGATION BAR -->
-<nav class="topnav">
-  <a href="#home">Menu</a>
-  <a href="#history">Sejarah Palestin</a>
-  <a href="#stats">Statistik Kematian</a>
-  <a href="#damage">Kerosakan</a>
-</nav>
+      <div class="lang-select">
+        <label for="langSelect" id="langLabel">Bahasa:</label>
+        <select id="langSelect" aria-label="Pilih Bahasa">
+          <option value="ms">Bahasa Melayu</option>
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="id">Bahasa Indonesia</option>
+        </select>
+      </div>
+    </header>
 
-<div class="nav-auth">    
-  <button id="loginBtn" class="mutebtn">Log Masuk</button>    
-  <button id="logoutBtn" class="mutebtn" style="display:none">Log Keluar</button>    
-</div>    
+    <!-- NAV under H1 -->
+    <nav class="topnav" role="navigation" aria-label="Main navigation">
+      <button data-target="menu" class="active" id="nav_menu">Menu</button>
+      <button data-target="history" id="nav_history">Sejarah</button>
+      <button data-target="stats" id="nav_stats">Statistik</button>
+      <button data-target="damage" id="nav_damage">Kerosakan</button>
+    </nav>
 
-<header id="home">    
-  <div class="logo">PF</div>    
-  <h1>Tabung Kemanusiaan Palestin</h1>    
-  <div class="lang">    
-    <label>Pilih Bahasa: </label>    
-    <select id="langSelect">    
-      <option value="ms">Bahasa Melayu</option>    
-      <option value="en">English</option>    
-      <option value="ar">العربية (Arab)</option>    
-      <option value="id">Bahasa Indonesia</option>    
-    </select>    
-  </div>    
-</header>    
+    <div class="grid">
+      <!-- LEFT: Main content -->
+      <main>
 
-<div class="container">    
-  <div class="grid">
+        <!-- MENU (default visible) -->
+        <section id="menu" class="card section active">
+          <h2 id="menu_title">Menu Utama</h2>
+          <p id="menu_desc">Pilih tajuk di navbar untuk melihat maklumat lengkap. Video berkaitan disertakan di bawah.</p>
 
-    <!-- ✳️ LEFT SECTION -->
-    <section>    
-      <div class="card">    
-        <h2>Isu Kemanusiaan Palestin</h2>    
-        <p>Penduduk Palestin menghadapi kekurangan makanan, ubat-ubatan, tempat perlindungan dan keselamatan asas. Bantuan anda memberi kesan besar.</p>    
+          <!-- video related kept -->
+          <div style="position:relative;padding-top:56%;border-radius:10px;overflow:hidden;margin-top:12px">
+            <iframe id="related_video" src="https://www.youtube.com/embed/TfKhle4k3d0"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen title="Video Berkaitan"></iframe>
+          </div>
 
-        <!-- REALISTIC IMAGES -->    
-        <img class="rescue" src="Sumud.jpg" alt="Kemanusiaan Palestin" />    
-        <img class="rescue" src="palestin.jpg" alt="Bantuan Mangsa" />    
+          <div style="margin-top:14px">
+            <button class="btn">Derma Sekarang</button>
+            <button class="mutebtn" style="margin-left:8px" id="learn_more_btn">Ketahui Lebih Lanjut</button>
+          </div>
+        </section>
 
-        <h3>Video Berkaitan</h3>    
-        <div style="position:relative;padding-top:56%">    
-          <iframe src="https://www.youtube.com/embed/TfKhle4k3d0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe>    
-        </div>    
-      </div>    
+        <!-- HISTORY -->
+        <section id="history" class="card section">
+          <h2 id="history_title">Sejarah Palestin</h2>
+          <p id="history_text">Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada pelbagai komunitas. Konflik moden bermula pada pertengahan abad ke-20 dan memberi impak besar kepada kehidupan rakyat.</p>
+          <button class="cta emph" id="history_cta">Baca Sejarah Penuh</button>
+        </section>
 
-      <div class="card">    
-        <h3>Isu Hak Asasi</h3>    
-        <ul>    
-          <li>Hak perlindungan kepada orang awam</li>    
-          <li>Akses bantuan kemanusiaan tanpa halangan</li>    
-          <li>Keselamatan kanak-kanak</li>    
-          <li>Kebebasan maklumat & laporan bebas</li>    
-        </ul>    
-      </div>    
-    </section>    
+        <!-- STATS -->
+        <section id="stats" class="card section">
+          <h2 id="stats_title">Statistik Kematian</h2>
+          <div id="chart_stats"></div>
+          <div class="small muted" id="stats_note">Graf menunjukkan contoh pecahan mangsa mengikut kumpulan umur; kemaskini data sebenar apabila tersedia.</div>
+          <button class="cta secondary" id="stats_cta">Sokong Kecemasan Perubatan</button>
+        </section>
 
-    <!-- ✳️ RIGHT SECTION -->
-    <aside>    
-      <div class="card">    
-        <h2>Sumbangan</h2>    
-        <p>Pilih kaedah pembayaran</p>    
+        <!-- DAMAGE -->
+        <section id="damage" class="card section">
+          <h2 id="damage_title">Kerosakan Infrastruktur</h2>
+          <div id="chart_damage"></div>
+          <p class="small muted" id="damage_note">Graf menunjukkan contoh peratus jenis infrastruktur yang rosak. Sumber data perlu dikemaskini dengan angka rasmi.</p>
+          <button class="cta emph" id="damage_cta">Bantuan Infrastruktur</button>
+        </section>
 
-        <h4>💳 QR Pay (Malaysia)</h4>    
-        <img class="qr" src="https://i.imgur.com/0X7GQKp.png" alt="QR Pay" />    
+      </main>
 
-        <h4>🟦 Touch 'n Go eWallet</h4>    
-        <img class="qr" src="tng.png" alt="TnG QR" />    
+      <!-- RIGHT: Donation & quick info -->
+      <aside>
+        <div class="card">
+          <h3 id="donation_title">Sumbangan</h3>
+          <p id="donation_desc">Pilih kaedah pembayaran dan isi maklumat ringkas.</p>
 
-        <h4>🌍 PayPal</h4>    
-        <a class="btn" href="#">Derma melalui PayPal</a>    
+          <h4 id="qr_label">💳 QR Pay (Malaysia)</h4>
+          <img class="rescue" src="https://i.imgur.com/0X7GQKp.png" alt="QR Pay" />
 
-        <hr style="border-color:#233" />    
+          <h4 id="tng_label">🟦 Touch 'n Go eWallet</h4>
+          <img class="rescue" src="tng.png" alt="TnG QR" />
 
-        <p>Isi maklumat anda:</p>    
-        <input id="nameField" type="text" placeholder="Nama penuh" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />    
-        <input id="emailField" type="email" placeholder="Emel" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />    
+          <h4 id="paypal_label">🌍 PayPal</h4>
+          <a class="btn" href="#" id="paypal_btn">Derma melalui PayPal</a>
 
-        <button class="btn" style="width:100%;margin-top:10px" onclick="submitDonation()">Hantar</button>    
-      </div>    
-    </aside>    
+          <hr />
 
-  </div>    
+          <div>
+            <input id="nameField" type="text" placeholder="Nama penuh" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
+            <input id="emailField" type="email" placeholder="Emel" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
+            <button class="btn" style="width:100%;margin-top:10px" onclick="submitDonation()" id="donate_button">Hantar</button>
+          </div>
+        </div>
 
-  <!-- 📌 SECTION: SEJARAH PALESTIN -->
-  <section id="history" class="card">
-    <h2>Sejarah Palestin</h2>
-    <p>Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada tiga agama utama. Konflik moden bermula pada 1948 apabila ratusan ribu rakyat Palestin kehilangan rumah akibat pembentukan negara Israel.</p>
-  </section>
+        <div class="card" style="margin-top:12px">
+          <h4 id="quick_title">Info Pantas</h4>
+          <p id="quick_text" class="small muted">Peta bantuan, kontak kecemasan dan ringkasan isu boleh diletakkan di sini.</p>
+        </div>
+      </aside>
+    </div> <!-- grid -->
 
-  <!-- 📌 SECTION: STATISTIK KEMATIAN -->
-  <section id="stats" class="card">
-    <h2>Statistik Kematian</h2>
-    <ul>
-      <li>Majoriti mangsa terdiri daripada kanak-kanak dan wanita.</li>
-      <li>Serangan berterusan menyebabkan angka kematian meningkat setiap hari.</li>
-      <li>Banyak mangsa tidak sempat menerima rawatan kecemasan.</li>
-    </ul>
-  </section>
+  </div> <!-- page -->
 
-  <!-- 📌 SECTION: KEROSAKAN INFRASTRUKTUR -->
-  <section id="damage" class="card">
-    <h2>Kerosakan Infrastruktur</h2>
-    <ul>
-      <li>Hospital, sekolah, dan pusat bantuan dimusnahkan.</li>
-      <li>Bekalan elektrik & air terputus di banyak kawasan.</li>
-      <li>Ribuan bangunan kediaman musnah sepenuhnya.</li>
-    </ul>
-  </section>
+  <div class="accessibility" id="okuBtn">♿ Mesra OKU</div>
 
-</div>
+  <script>
+    // ------------------------
+    // i18n text data
+    // ------------------------
+    const langData = {
+      ms: {
+        title: "Tabung Kemanusiaan Palestin",
+        subtitle: "Solidariti dan bantuan kecemasan",
+        langLabel: "Bahasa:",
+        nav: { menu: "Menu", history: "Sejarah", stats: "Statistik", damage: "Kerosakan" },
+        menu_title: "Menu Utama",
+        menu_desc: "Pilih tajuk di navbar untuk melihat maklumat lengkap. Video berkaitan disertakan di bawah.",
+        history_title: "Sejarah Palestin",
+        history_text: "Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada pelbagai komunitas. Konflik moden bermula pada pertengahan abad ke-20 dan memberi impak besar kepada kehidupan rakyat.",
+        history_cta: "Baca Sejarah Penuh",
+        stats_title: "Statistik Kematian",
+        stats_note: "Graf menunjukkan contoh pecahan mangsa mengikut kumpulan umur; kemaskini data sebenar apabila tersedia.",
+        stats_cta: "Sokong Kecemasan Perubatan",
+        damage_title: "Kerosakan Infrastruktur",
+        damage_note: "Graf menunjukkan contoh peratus jenis infrastruktur yang rosak. Sumber data perlu dikemaskini dengan angka rasmi.",
+        damage_cta: "Bantuan Infrastruktur",
+        donation_title: "Sumbangan",
+        donation_desc: "Pilih kaedah pembayaran dan isi maklumat ringkas.",
+        qr_label: "💳 QR Pay (Malaysia)",
+        tng_label: "🟦 Touch 'n Go eWallet",
+        paypal_label: "🌍 PayPal",
+        paypal_btn: "Derma melalui PayPal",
+        donate_button: "Hantar",
+        quick_title: "Info Pantas",
+        quick_text: "Peta bantuan, kontak kecemasan dan ringkasan isu boleh diletakkan di sini.",
+        chart_stats_title: "Mangsa mengikut kumpulan umur",
+        chart_damage_title: "Peratus Kerosakan Infrastruktur",
+        chart_stats_description: "Contoh: Kanak-kanak, Wanita, Warga Emas",
+        chart_damage_description: "Contoh: Hospital, Sekolah, Rumah",
+      },
+      en: {
+        title: "Humanitarian Fund Palestine",
+        subtitle: "Solidarity and emergency aid",
+        langLabel: "Language:",
+        nav: { menu: "Menu", history: "History", stats: "Statistics", damage: "Damage" },
+        menu_title: "Main Menu",
+        menu_desc: "Choose a topic from the navbar to view full details. Related video included below.",
+        history_title: "History of Palestine",
+        history_text: "Palestine has a history spanning thousands of years and is sacred to multiple communities. The modern conflict began in the mid-20th century with profound effects on civilians.",
+        history_cta: "Read Full History",
+        stats_title: "Death Statistics",
+        stats_note: "Chart shows example breakdown of victims by age group; update with official data when available.",
+        stats_cta: "Support Medical Emergency",
+        damage_title: "Infrastructure Damage",
+        damage_note: "Chart shows sample percentages of damaged infrastructure types. Update with official figures.",
+        damage_cta: "Infrastructure Aid",
+        donation_title: "Donations",
+        donation_desc: "Choose a payment method and enter brief details.",
+        qr_label: "💳 QR Pay (Malaysia)",
+        tng_label: "🟦 Touch 'n Go eWallet",
+        paypal_label: "🌍 PayPal",
+        paypal_btn: "Donate via PayPal",
+        donate_button: "Submit",
+        quick_title: "Quick Info",
+        quick_text: "Relief maps, emergency contacts and issue summaries can be placed here.",
+        chart_stats_title: "Victims by age group",
+        chart_damage_title: "Infrastructure Damage Percentage",
+        chart_stats_description: "Example: Children, Women, Elderly",
+        chart_damage_description: "Example: Hospitals, Schools, Homes",
+      },
+      ar: {
+        title: "صندوق فلسطين الإنساني",
+        subtitle: "تضامن وإغاثة طارئة",
+        langLabel: "اللغة:",
+        nav: { menu: "القائمة", history: "التاريخ", stats: "الإحصاءات", damage: "الأضرار" },
+        menu_title: "القائمة الرئيسية",
+        menu_desc: "اختَر موضوعًا من شريط التنقل لعرض التفاصيل. الفيديو المتعلق مُدرَج أدناه.",
+        history_title: "تاريخ فلسطين",
+        history_text: "تمتلك فلسطين تاريخًا يعود لآلاف السنين وهي مقدّسة لعدة مجتمعات. بدأ الصراع الحديث في منتصف القرن العشرين وله آثار كبيرة على السكان المدنيين.",
+        history_cta: "اقرأ التاريخ الكامل",
+        stats_title: "إحصاءات الوفيات",
+        stats_note: "يوضح الرسم مثالًا لتقسيم الضحايا حسب الفئة العمرية؛ حدّث البيانات الرسمية عند توفرها.",
+        stats_cta: "ادعم الطوارئ الطبية",
+        damage_title: "أضرار البنية التحتية",
+        damage_note: "يوضح الرسم نسبًا نموذجية لأنواع البنية التحتية المتضررة. حدّثها بالأرقام الرسمية.",
+        damage_cta: "مساعدة للبنية التحتية",
+        donation_title: "التبرعات",
+        donation_desc: "اختر طريقة الدفع وأدخل التفاصيل الأساسية.",
+        qr_label: "💳 سداد عبر QR (ماليزيا)",
+        tng_label: "🟦 Touch 'n Go eWallet",
+        paypal_label: "🌍 باي بال",
+        paypal_btn: "التبرع عبر باي بال",
+        donate_button: "إرسال",
+        quick_title: "معلومات سريعة",
+        quick_text: "يمكن وضع خرائط الإغاثة، جهات الاتصال الطارئة وملخصات القضايا هنا.",
+        chart_stats_title: "الضحايا حسب الفئة العمرية",
+        chart_damage_title: "نسبة أضرار البنية التحتية",
+        chart_stats_description: "مثال: أطفال، نساء، كبار السن",
+        chart_damage_description: "مثال: مستشفيات، مدارس، منازل",
+      },
+      id: {
+        title: "Dana Kemanusiaan Palestina",
+        subtitle: "Solidaritas dan bantuan darurat",
+        langLabel: "Bahasa:",
+        nav: { menu: "Menu", history: "Sejarah", stats: "Statistik", damage: "Kerusakan" },
+        menu_title: "Menu Utama",
+        menu_desc: "Pilih topik dari navbar untuk melihat rincian lengkap. Video terkait disertakan di bawah.",
+        history_title: "Sejarah Palestina",
+        history_text: "Palestina memiliki sejarah ribuan tahun dan suci bagi beberapa komunitas. Konflik modern dimulai pada pertengahan abad ke-20 dan berdampak besar pada warga sipil.",
+        history_cta: "Baca Sejarah Lengkap",
+        stats_title: "Statistik Kematian",
+        stats_note: "Grafik menunjukkan contoh pembagian korban menurut kelompok usia; perbarui dengan data resmi bila tersedia.",
+        stats_cta: "Dukung Darurat Medis",
+        damage_title: "Kerusakan Infrastruktur",
+        damage_note: "Grafik menunjukkan persentase contoh tipe infrastruktur yang rusak. Perbarui dengan angka resmi.",
+        damage_cta: "Bantuan Infrastruktur",
+        donation_title: "Donasi",
+        donation_desc: "Pilih metode pembayaran dan masukkan detail singkat.",
+        qr_label: "💳 QR Pay (Malaysia)",
+        tng_label: "🟦 Touch 'n Go eWallet",
+        paypal_label: "🌍 PayPal",
+        paypal_btn: "Donasi via PayPal",
+        donate_button: "Kirim",
+        quick_title: "Info Singkat",
+        quick_text: "Peta bantuan, kontak darurat, dan ringkasan isu dapat ditempatkan di sini.",
+        chart_stats_title: "Korban menurut kelompok umur",
+        chart_damage_title: "Persentase Kerusakan Infrastruktur",
+        chart_stats_description: "Contoh: Anak-anak, Wanita, Lansia",
+        chart_damage_description: "Contoh: Rumah Sakit, Sekolah, Rumah",
+      }
+    };
 
-<!-- ♿ OKU BUTTON -->
-<div class="accessibility" id="okuBtn">♿ Mesra OKU</div>
+    // ------------------------
+    // Elements
+    // ------------------------
+    const navButtons = document.querySelectorAll('nav.topnav button');
+    const sections = document.querySelectorAll('.section');
+    const langSelect = document.getElementById('langSelect');
 
-<script>    
-  // LOGIN LOGOUT    
-  const loginBtn = document.getElementById("loginBtn");    
-  const logoutBtn = document.getElementById("logoutBtn");    
+    // cta buttons
+    const historyCta = document.getElementById('history_cta');
+    const statsCta = document.getElementById('stats_cta');
+    const damageCta = document.getElementById('damage_cta');
 
-  loginBtn.onclick = ()=>{    
-    localStorage.setItem("logged","1");    
-    loginBtn.style.display="none";    
-    logoutBtn.style.display="inline-block";    
-    alert("Berjaya log masuk (demo)");    
-  }
+    // chart containers
+    const chartStatsDiv = document.getElementById('chart_stats');
+    const chartDamageDiv = document.getElementById('chart_damage');
 
-  logoutBtn.onclick = ()=>{    
-    localStorage.removeItem("logged");    
-    loginBtn.style.display="inline-block";    
-    logoutBtn.style.display="none";    
-    alert("Log keluar berjaya");    
-  }
+    // init Google charts
+    google.charts.load('current', {'packages':['corechart','bar']});
+    google.charts.setOnLoadCallback(initCharts);
 
-  if(localStorage.getItem("logged")){    
-    loginBtn.style.display="none";    
-    logoutBtn.style.display="inline-block";    
-  }
+    let currentLang = 'ms';
+    let chartsLoaded = false;
 
-  function submitDonation(){    
-    const name=document.getElementById("nameField").value;    
-    if(!name){alert("Sila masukkan nama");return;}    
-    alert("Terima kasih atas sumbangan! (demo)");    
-  }
+    // ------------------------
+    // Navigation behaviour
+    // ------------------------
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = btn.getAttribute('data-target');
+        showOnlySection(target);
+        setActiveNav(btn);
+      });
+    });
 
-  // OKU MODE    
-  const okuBtn=document.getElementById("okuBtn");    
-  let oku=false;    
-  okuBtn.onclick=()=>{    
-    oku=!oku;    
-    if(oku){    
-      document.body.style.fontSize="1.3rem";    
-      document.body.style.letterSpacing="0.5px";    
-      okuBtn.innerHTML="♿ Mod Biasa";    
-    } else {    
-      document.body.style.fontSize="1rem";    
-      okuBtn.innerHTML="♿ Mesra OKU";    
-    }    
-  }    
-</script>
+    function setActiveNav(activeBtn){
+      navButtons.forEach(b => b.classList.remove('active'));
+      activeBtn.classList.add('active');
+    }
 
+    function showOnlySection(id){
+      sections.forEach(s => {
+        if(s.id === id){
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      // show CTAs only for the active section
+      // hide all first
+      [historyCta, statsCta, damageCta].forEach(c => c.classList.remove('show'));
+      if(id === 'history') historyCta.classList.add('show');
+      if(id === 'stats') statsCta.classList.add('show');
+      if(id === 'damage') damageCta.classList.add('show');
+
+      // If stats or damage shown, redraw charts for current language
+      if(id === 'stats' || id === 'damage'){
+        drawCharts(); // ensure charts drawn/redrawn
+      }
+    }
+
+    // default is menu visible (already active)
+
+    // ------------------------
+    // Language switching
+    // ------------------------
+    function applyLanguage(lang){
+      currentLang = lang;
+      const d = langData[lang];
+
+      // Title & header
+      document.getElementById('title').textContent = d.title;
+      document.getElementById('subtitle').textContent = d.subtitle;
+      document.getElementById('langLabel').textContent = d.langLabel;
+
+      // Nav labels
+      document.getElementById('nav_menu').textContent = d.nav.menu;
+      document.getElementById('nav_history').textContent = d.nav.history;
+      document.getElementById('nav_stats').textContent = d.nav.stats;
+      document.getElementById('nav_damage').textContent = d.nav.damage;
+
+      // Menu
+      document.getElementById('menu_title').textContent = d.menu_title;
+      document.getElementById('menu_desc').textContent = d.menu_desc;
+
+      // History
+      document.getElementById('history_title').textContent = d.history_title;
+      document.getElementById('history_text').textContent = d.history_text;
+      historyCta.textContent = d.history_cta;
+
+      // Stats
+      document.getElementById('stats_title').textContent = d.stats_title;
+      document.getElementById('stats_note').textContent = d.stats_note;
+      statsCta.textContent = d.stats_cta;
+
+      // Damage
+      document.getElementById('damage_title').textContent = d.damage_title;
+      document.getElementById('damage_note').textContent = d.damage_note;
+      damageCta.textContent = d.damage_cta;
+
+      // Donation/right
+      document.getElementById('donation_title').textContent = d.donation_title;
+      document.getElementById('donation_desc').textContent = d.donation_desc;
+      document.getElementById('qr_label').textContent = d.qr_label;
+      document.getElementById('tng_label').textContent = d.tng_label;
+      document.getElementById('paypal_label').textContent = d.paypal_label;
+      document.getElementById('paypal_btn').textContent = d.paypal_btn;
+      document.getElementById('donate_button').textContent = d.donate_button;
+      document.getElementById('quick_title').textContent = d.quick_title;
+      document.getElementById('quick_text').textContent = d.quick_text;
+
+      // Set page direction for Arabic (RTL) otherwise LTR
+      if(lang === 'ar'){
+        document.documentElement.lang = 'ar';
+        document.body.classList.add('rtl');
+      } else {
+        document.documentElement.lang = lang;
+        document.body.classList.remove('rtl');
+      }
+
+      // redraw charts with localized titles/labels
+      drawCharts();
+    }
+
+    langSelect.addEventListener('change', (e) => {
+      applyLanguage(e.target.value);
+    });
+
+    // initial
+    applyLanguage(currentLang);
+
+    // ------------------------
+    // Charts logic (Google Charts)
+    // ------------------------
+    function initCharts(){
+      chartsLoaded = true;
+      drawCharts();
+    }
+
+    function drawCharts(){
+      if(!chartsLoaded) return;
+      const d = langData[currentLang];
+
+      // ---------- Stats Bar Chart ----------
+      // sample data: [group, number]
+      const statsData = google.visualization.arrayToDataTable([
+        [ d.chart_stats_title || 'Group', 'Count', { role: 'style' } ],
+        [ d.chart_stats_description ? d.chart_stats_description.split(',')[0].trim() : 'Children', 1200, 'opacity: 0.9' ],
+        [ d.chart_stats_description ? d.chart_stats_description.split(',')[1].trim() : 'Women', 900, 'opacity: 0.9' ],
+        [ d.chart_stats_description ? d.chart_stats_description.split(',')[2].trim() : 'Elderly', 300, 'opacity: 0.9' ],
+      ]);
+
+      const statsOptions = {
+        title: d.chart_stats_title,
+        height: 320,
+        legend: { position: 'none' },
+        vAxis: { title: '' },
+        hAxis: { title: '' },
+        chartArea: { left:60, right:20, top:50, bottom:60 },
+        colors: [ currentLang === 'ar' ? '#ca3a3a' : '#ca3a3a' ]
+      };
+
+      const statsChart = new google.visualization.ColumnChart(chartStatsDiv);
+      statsChart.draw(statsData, statsOptions);
+
+      // ---------- Damage Pie Chart ----------
+      const damageData = google.visualization.arrayToDataTable([
+        [ d.chart_damage_title || 'Type', 'Percent' ],
+        [ d.chart_damage_description ? d.chart_damage_description.split(',')[0].trim() : 'Hospitals', 35 ],
+        [ d.chart_damage_description ? d.chart_damage_description.split(',')[1].trim() : 'Schools', 25 ],
+        [ d.chart_damage_description ? d.chart_damage_description.split(',')[2].trim() : 'Homes', 40 ]
+      ]);
+
+      const damageOptions = {
+        title: d.chart_damage_title,
+        height: 320,
+        pieHole: 0.35,
+        chartArea: { left:20, right:20, top:50, bottom:60 },
+      };
+
+      const damageChart = new google.visualization.PieChart(chartDamageDiv);
+      damageChart.draw(damageData, damageOptions);
+    }
+
+    // Make charts responsive on resize
+    window.addEventListener('resize', () => {
+      drawCharts();
+    });
+
+    // ------------------------
+    // Donation/demo handlers
+    // ------------------------
+    function submitDonation(){
+      const name = document.getElementById('nameField').value.trim();
+      if(!name){
+        alert(currentLang === 'en' ? 'Please enter your name' : (currentLang === 'ar' ? 'يرجى إدخال الاسم' : 'Sila masukkan nama'));
+        return;
+      }
+      alert(currentLang === 'en' ? 'Thank you for your donation! (demo)' : (currentLang === 'ar' ? 'شكرًا لتبرعك! (تجريبي)' : 'Terima kasih atas sumbangan! (demo)'));
+      document.getElementById('nameField').value = '';
+      document.getElementById('emailField').value = '';
+    }
+    window.submitDonation = submitDonation;
+
+    // ------------------------
+    // OKU accessibility toggle
+    // ------------------------
+    const okuBtn = document.getElementById('okuBtn');
+    let oku = false;
+    okuBtn.addEventListener('click', () => {
+      oku = !oku;
+      if(oku){
+        document.body.style.fontSize = '1.25rem';
+        okuBtn.textContent = (currentLang === 'ar' ? 'الوضع العادي ♿' : (currentLang === 'en' ? 'Normal Mode ♿' : '♿ Mod Biasa'));
+      } else {
+        document.body.style.fontSize = '';
+        okuBtn.textContent = (currentLang === 'ar' ? '♿ نمط الوصول' : (currentLang === 'en' ? '♿ Accessibility' : '♿ Mesra OKU'));
+      }
+    });
+
+    // ------------------------
+    // Init: ensure menu active and nav highlight
+    // ------------------------
+    document.querySelector('nav.topnav button[data-target="menu"]').classList.add('active');
+
+    // Ensure charts updated after load if stats/damage viewed
+    // Nothing else to do — everything handled by drawCharts and showOnlySection
+
+  </script>
 </body>
 </html>
