@@ -1,142 +1,223 @@
-<!doctype html>
+<!doctype html>    
+<html lang="ms">    
+<head>    
+  <meta charset="utf-8" />    
+  <meta name="viewport" content="width=device-width,initial-scale=1" />    
+  <title>Tabung Kemanusiaan — Solidariti Palestin</title>    
 
-<html lang="ms">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tabung Kemanusiaan — Solidariti Palestin</title>
-  <style>
-    :root{--bg:#0f172a;--card:#0b1220;--accent:#ca3a3a;--muted:#94a3b8;--glass: rgba(255,255,255,0.05)}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui; background:#071228;color:#e6eef8}
+  <style>    
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ca3a3a;--muted:#94a3b8;--glass:rgba(255,255,255,0.05)}
+
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{margin:0;font-family:Inter, system-ui;background:#071228;color:#e6eef8}
+
+    /* 📌 NAVBAR */
+    .topnav{
+      width:100%;
+      background:#0b1220;
+      padding:14px 20px;
+      display:flex;
+      gap:25px;
+      border-bottom:1px solid #233;
+      position:sticky;
+      top:0;
+      z-index:999;
+    }
+    .topnav a{
+      color:#e6eef8;
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:8px;
+      transition:0.2s;
+    }
+    .topnav a:hover{
+      background:var(--accent);
+    }
+
     header{display:flex;align-items:center;gap:16px;padding:16px}
     .container{max-width:1250px;margin:auto;padding:20px}
     .logo{width:60px;height:60px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700}
     .lang{margin-left:auto;color:var(--muted)}
     select{padding:6px;border-radius:8px;background:#0f1a30;color:white;border:1px solid #233}
+
     .card{background:var(--glass);backdrop-filter:blur(6px);padding:18px;border-radius:14px;margin-bottom:18px}
     .grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
     @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
     img.rescue{width:100%;border-radius:12px;margin:10px 0}
     .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
     .mutebtn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--muted);padding:8px 12px;border-radius:10px;text-decoration:none}
+
     .accessibility{position:fixed;bottom:20px;right:20px;background:#1e293b;color:white;padding:10px 14px;border-radius:50px;cursor:pointer;border:2px solid #334155}
-    .okumode{font-size:1.3rem}
-    .nav-auth{position:absolute;top:20px;right:20px}
+
     .qr{width:120px;border-radius:8px;margin-top:8px}
-  </style>
-</head>
-<body>  <div class="nav-auth">
-    <button id="loginBtn" class="mutebtn">Log Masuk</button>
-    <button id="logoutBtn" class="mutebtn" style="display:none">Log Keluar</button>
-  </div>  <header>
-    <div class="logo">PF</div>
-    <h1>Tabung Kemanusiaan Palestin</h1>
-    <div class="lang">
-      <label>Pilih Bahasa: </label>
-      <select id="langSelect">
-        <option value="ms">Bahasa Melayu</option>
-        <option value="en">English</option>
-        <option value="ar">العربية (Arab)</option>
-        <option value="id">Bahasa Indonesia</option>
-      </select>
-    </div>
-  </header>  <div class="container">
-    <div class="grid"><!-- LEFT SECTION -->
-  <section>
-    <div class="card">
-      <h2>Isu Kemanusiaan Palestin</h2>
-      <p>Penduduk Palestin menghadapi kekurangan makanan, ubat-ubatan, tempat perlindungan dan keselamatan asas. Bantuan anda memberi kesan besar.</p>
+    .nav-auth{position:absolute;top:20px;right:20px}
+  </style>    
+</head>    
 
-      <!-- REALISTIC IMAGES -->
-      <img class="rescue" src="Sumud.jpg" alt="Kemanusiaan Palestin" />
-      <img class="rescue" src="palestin.jpg" alt="Bantuan Mangsa" />
+<body>
 
-      <h3>Video Berkaitan</h3>
-      <div style="position:relative;padding-top:56%">
-        <iframe src="https://m.youtube.com/embed/TfKhle4k3d0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe>
-      </div>
-    </div>
+<!-- 🔥 NAVIGATION BAR -->
+<nav class="topnav">
+  <a href="#home">Menu</a>
+  <a href="#history">Sejarah Palestin</a>
+  <a href="#stats">Statistik Kematian</a>
+  <a href="#damage">Kerosakan</a>
+</nav>
 
-    <div class="card">
-      <h3>Isu Hak Asasi</h3>
-      <ul>
-        <li>Hak perlindungan kepada orang awam</li>
-        <li>Akses bantuan kemanusiaan tanpa halangan</li>
-        <li>Keselamatan kanak-kanak</li>
-        <li>Kebebasan maklumat & laporan bebas</li>
-      </ul>
-    </div>
+<div class="nav-auth">    
+  <button id="loginBtn" class="mutebtn">Log Masuk</button>    
+  <button id="logoutBtn" class="mutebtn" style="display:none">Log Keluar</button>    
+</div>    
+
+<header id="home">    
+  <div class="logo">PF</div>    
+  <h1>Tabung Kemanusiaan Palestin</h1>    
+  <div class="lang">    
+    <label>Pilih Bahasa: </label>    
+    <select id="langSelect">    
+      <option value="ms">Bahasa Melayu</option>    
+      <option value="en">English</option>    
+      <option value="ar">العربية (Arab)</option>    
+      <option value="id">Bahasa Indonesia</option>    
+    </select>    
+  </div>    
+</header>    
+
+<div class="container">    
+  <div class="grid">
+
+    <!-- ✳️ LEFT SECTION -->
+    <section>    
+      <div class="card">    
+        <h2>Isu Kemanusiaan Palestin</h2>    
+        <p>Penduduk Palestin menghadapi kekurangan makanan, ubat-ubatan, tempat perlindungan dan keselamatan asas. Bantuan anda memberi kesan besar.</p>    
+
+        <!-- REALISTIC IMAGES -->    
+        <img class="rescue" src="Sumud.jpg" alt="Kemanusiaan Palestin" />    
+        <img class="rescue" src="palestin.jpg" alt="Bantuan Mangsa" />    
+
+        <h3>Video Berkaitan</h3>    
+        <div style="position:relative;padding-top:56%">    
+          <iframe src="https://www.youtube.com/embed/TfKhle4k3d0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe>    
+        </div>    
+      </div>    
+
+      <div class="card">    
+        <h3>Isu Hak Asasi</h3>    
+        <ul>    
+          <li>Hak perlindungan kepada orang awam</li>    
+          <li>Akses bantuan kemanusiaan tanpa halangan</li>    
+          <li>Keselamatan kanak-kanak</li>    
+          <li>Kebebasan maklumat & laporan bebas</li>    
+        </ul>    
+      </div>    
+    </section>    
+
+    <!-- ✳️ RIGHT SECTION -->
+    <aside>    
+      <div class="card">    
+        <h2>Sumbangan</h2>    
+        <p>Pilih kaedah pembayaran</p>    
+
+        <h4>💳 QR Pay (Malaysia)</h4>    
+        <img class="qr" src="https://i.imgur.com/0X7GQKp.png" alt="QR Pay" />    
+
+        <h4>🟦 Touch 'n Go eWallet</h4>    
+        <img class="qr" src="tng.png" alt="TnG QR" />    
+
+        <h4>🌍 PayPal</h4>    
+        <a class="btn" href="#">Derma melalui PayPal</a>    
+
+        <hr style="border-color:#233" />    
+
+        <p>Isi maklumat anda:</p>    
+        <input id="nameField" type="text" placeholder="Nama penuh" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />    
+        <input id="emailField" type="email" placeholder="Emel" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />    
+
+        <button class="btn" style="width:100%;margin-top:10px" onclick="submitDonation()">Hantar</button>    
+      </div>    
+    </aside>    
+
+  </div>    
+
+  <!-- 📌 SECTION: SEJARAH PALESTIN -->
+  <section id="history" class="card">
+    <h2>Sejarah Palestin</h2>
+    <p>Palestin memiliki sejarah ribuan tahun dan menjadi tanah suci kepada tiga agama utama. Konflik moden bermula pada 1948 apabila ratusan ribu rakyat Palestin kehilangan rumah akibat pembentukan negara Israel.</p>
   </section>
 
-  <!-- RIGHT SECTION DONATION -->
-  <aside>
-    <div class="card">
-      <h2>Sumbangan</h2>
-      <p>Pilih kaedah pembayaran</p>
+  <!-- 📌 SECTION: STATISTIK KEMATIAN -->
+  <section id="stats" class="card">
+    <h2>Statistik Kematian</h2>
+    <ul>
+      <li>Majoriti mangsa terdiri daripada kanak-kanak dan wanita.</li>
+      <li>Serangan berterusan menyebabkan angka kematian meningkat setiap hari.</li>
+      <li>Banyak mangsa tidak sempat menerima rawatan kecemasan.</li>
+    </ul>
+  </section>
 
-      <h4>💳 QR Pay (Malaysia)</h4>
-      <img class="qr" src="https://i.imgur.com/0X7GQKp.png" alt="QR Pay" />
+  <!-- 📌 SECTION: KEROSAKAN INFRASTRUKTUR -->
+  <section id="damage" class="card">
+    <h2>Kerosakan Infrastruktur</h2>
+    <ul>
+      <li>Hospital, sekolah, dan pusat bantuan dimusnahkan.</li>
+      <li>Bekalan elektrik & air terputus di banyak kawasan.</li>
+      <li>Ribuan bangunan kediaman musnah sepenuhnya.</li>
+    </ul>
+  </section>
 
-      <h4>🟦 Touch 'n Go eWallet</h4>
-      <img class="qr" src="tng.png" alt="TnG QR" />
-
-      <h4>🌍 PayPal</h4>
-      <a class="btn" href="#">Derma melalui PayPal</a>
-
-      <hr style="border-color:#233" />
-
-      <p>Isi maklumat anda:</p>
-      <input id="nameField" type="text" placeholder="Nama penuh" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
-      <input id="emailField" type="email" placeholder="Emel" style="width:100%;padding:8px;border-radius:8px;margin:6px 0" />
-
-      <button class="btn" style="width:100%;margin-top:10px" onclick="submitDonation()">Hantar</button>
-    </div>
-  </aside>
 </div>
 
-  </div>  <!-- OKU ACCESSIBILITY BUTTON -->  <div class="accessibility" id="okuBtn">♿ Mesra OKU</div>  <script>
-    // LOGIN LOGOUT
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
+<!-- ♿ OKU BUTTON -->
+<div class="accessibility" id="okuBtn">♿ Mesra OKU</div>
 
-    loginBtn.onclick = ()=>{
-      localStorage.setItem("logged","1");
-      loginBtn.style.display="none";
-      logoutBtn.style.display="inline-block";
-      alert("Berjaya log masuk (demo)");
-    }
-    logoutBtn.onclick = ()=>{
-      localStorage.removeItem("logged");
-      loginBtn.style.display="inline-block";
-      logoutBtn.style.display="none";
-      alert("Log keluar berjaya");
-    }
+<script>    
+  // LOGIN LOGOUT    
+  const loginBtn = document.getElementById("loginBtn");    
+  const logoutBtn = document.getElementById("logoutBtn");    
 
-    if(localStorage.getItem("logged")){
-      loginBtn.style.display="none";
-      logoutBtn.style.display="inline-block";
-    }
+  loginBtn.onclick = ()=>{    
+    localStorage.setItem("logged","1");    
+    loginBtn.style.display="none";    
+    logoutBtn.style.display="inline-block";    
+    alert("Berjaya log masuk (demo)");    
+  }
 
-    function submitDonation(){
-      const name=document.getElementById("nameField").value;
-      if(!name){alert("Sila masukkan nama");return;}
-      alert("Terima kasih atas sumbangan! (demo)");
-    }
+  logoutBtn.onclick = ()=>{    
+    localStorage.removeItem("logged");    
+    loginBtn.style.display="inline-block";    
+    logoutBtn.style.display="none";    
+    alert("Log keluar berjaya");    
+  }
 
-    // OKU MODE
-    const okuBtn=document.getElementById("okuBtn");
-    let oku=false;
-    okuBtn.onclick=()=>{
-      oku=!oku;
-      if(oku){
-        document.body.style.fontSize="1.3rem";
-        document.body.style.letterSpacing="0.5px";
-        okuBtn.innerHTML="♿ Mod Biasa";
-      } else {
-        document.body.style.fontSize="1rem";
-        okuBtn.innerHTML="♿ Mesra OKU";
-      }
-    }
+  if(localStorage.getItem("logged")){    
+    loginBtn.style.display="none";    
+    logoutBtn.style.display="inline-block";    
+  }
+
+  function submitDonation(){    
+    const name=document.getElementById("nameField").value;    
+    if(!name){alert("Sila masukkan nama");return;}    
+    alert("Terima kasih atas sumbangan! (demo)");    
+  }
+
+  // OKU MODE    
+  const okuBtn=document.getElementById("okuBtn");    
+  let oku=false;    
+  okuBtn.onclick=()=>{    
+    oku=!oku;    
+    if(oku){    
+      document.body.style.fontSize="1.3rem";    
+      document.body.style.letterSpacing="0.5px";    
+      okuBtn.innerHTML="♿ Mod Biasa";    
+    } else {    
+      document.body.style.fontSize="1rem";    
+      okuBtn.innerHTML="♿ Mesra OKU";    
+    }    
+  }    
+</script>
+
+</body>
 </html>
-  </script></body>
